@@ -1,6 +1,18 @@
-import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import '@/styles/globals.css'
+import { GoogleOAuthProvider } from '@react-oauth/google'
+import { env } from '@/utils/env'
+import { Navbar } from '@/components/nav/Navbar'
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+const App = ({ Component, pageProps }: AppProps) => {
+  return (
+    <GoogleOAuthProvider clientId={env.googleClientId}>
+      <>
+        <Navbar/>
+        <Component {...pageProps} />
+      </>
+    </GoogleOAuthProvider>
+  )
 }
+
+export default App

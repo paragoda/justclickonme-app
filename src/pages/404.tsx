@@ -1,13 +1,11 @@
+import { NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 
-export default function Home() {
-  useEffect(() => {}, []);
-
+const Error404: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Shorten and customize your URLs | Just Click On Me</title>
+        <title>Page wasn't found | Just Click On Me</title>
         <meta
           name="description"
           content="Shorten and customize your URLs with Just Click On Me"
@@ -15,14 +13,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        {/* <Navbar/> */}
-        <h1 className="text-center text-5xl lg:text-7xl font-bold mt-12">
-          Shorten and
-          <br />
-          customize your URLs
+      <main className="">
+        <h1 className=" text-center text-5xl lg:text-7xl font-bold mt-12">
+          Page wasn't found
         </h1>
       </main>
     </>
   );
-}
+};
+
+export default Error404;
