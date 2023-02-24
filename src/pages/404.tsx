@@ -1,5 +1,6 @@
-import { NextPage } from "next";
-import Head from "next/head";
+import { Navbar } from "@/components/nav/Navbar"
+import { NextPage } from "next"
+import Head from "next/head"
 
 const Error404: NextPage = () => {
   return (
@@ -13,13 +14,15 @@ const Error404: NextPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Navbar />
       <main className="">
         <h1 className=" text-center text-5xl lg:text-7xl font-bold mt-12">
           Page wasn't found
         </h1>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default Error404;
+export default Error404

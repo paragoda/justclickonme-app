@@ -1,8 +1,9 @@
-import Head from "next/head";
-import { useEffect, useState } from "react";
+import { Navbar } from "@/components/nav/Navbar"
+import Head from "next/head"
+import { useEffect, useState } from "react"
 
 export default function Home() {
-  useEffect(() => {}, []);
+  useEffect(() => {}, [])
 
   return (
     <>
@@ -15,8 +16,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Navbar />
+
       <main>
-        {/* <Navbar/> */}
         <h1 className="text-center text-5xl lg:text-7xl font-bold mt-12">
           Shorten and
           <br />
@@ -24,5 +27,5 @@ export default function Home() {
         </h1>
       </main>
     </>
-  );
+  )
 }

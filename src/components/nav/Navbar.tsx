@@ -1,32 +1,24 @@
-import Image from "next/image";
-import Link from "next/link";
-import logo from "../../../public/logo.png";
+import Image from "next/image"
+import Link from "next/link"
+import logo from "../../../public/logo.png"
 
 const NavbarLinks = () => {
   return (
     <>
-      <li>
-        <Link href="/plans">Subscription plans</Link>
-      </li>
-      <li>
-        <Link href="/benefits">Benefits</Link>
-      </li>
-      <li>
-        <Link href="/">Why you need it?</Link>
-      </li>
-      <li>
-        <Link href="/faq">FAQ</Link>
-      </li>
+      <Link href="/plans">Subscription plans</Link>
+      <Link href="/benefits">Benefits</Link>
+      <Link href="/">Why you need it?</Link>
+      <Link href="/faq">FAQ</Link>
     </>
-  );
-};
+  )
+}
 
 export const Navbar = () => {
   return (
-    <nav className="navbar shadow-sm mb-2">
+    <nav className="flex justify-between items-center shadow-sm mb-2 py-3">
       <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+        {/* <div className="dropdown">
+          <label className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -42,27 +34,23 @@ export const Navbar = () => {
               />
             </svg>
           </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
+          <ul className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
             <NavbarLinks />
           </ul>
-        </div>
-        <Link className="normal-case text-xl" href="/">
+        </div> */}
+        <Link href="/">
           <img src="/logo.svg" alt="JustClickOnMe" className="h-7 mx-2" />
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <NavbarLinks />
-        </ul>
+      <div className="hidden lg:flex gap-8">
+        <NavbarLinks />
       </div>
-      <div className="navbar-end">
-        <Link className="btn btn-primary" href="/auth">
-          Get started
-        </Link>
-      </div>
+      <Link
+        className=" py-2 px-6 border-blue-100 text-blue-600 hover:bg-blue-100 border-2"
+        href="/auth"
+      >
+        Get a plan
+      </Link>
     </nav>
-  );
-};
+  )
+}

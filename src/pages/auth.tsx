@@ -1,21 +1,22 @@
-import { GoogleBtn } from "@/components/auth/GoogleBtn";
-import { passwordLogin } from "@/utils/server";
-import { NextPage } from "next";
-import Head from "next/head";
-import { useState } from "react";
+import { GoogleBtn } from "@/components/auth/GoogleBtn"
+import { Navbar } from "@/components/nav/Navbar"
+import { passwordLogin } from "@/utils/server"
+import { NextPage } from "next"
+import Head from "next/head"
+import { useState } from "react"
 
 // TODO: auto_select for google only on
 const Auth: NextPage = () => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(true)
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const loginWithPassword = async () => {
-    const [token, err] = await passwordLogin(email, password);
+    const [token, err] = await passwordLogin(email, password)
 
-    console.log(token, err);
-  };
+    console.log(token, err)
+  }
 
   return (
     <>
@@ -28,6 +29,9 @@ const Auth: NextPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Navbar />
+
       <main>
         <h1 className="text-center text-5xl lg:text-7xl font-bold mt-12 mb-8 mx-6">
           Get started with:
@@ -57,6 +61,6 @@ const Auth: NextPage = () => {
         </div>
       </main>
     </>
-  );
-};
-export default Auth;
+  )
+}
+export default Auth
