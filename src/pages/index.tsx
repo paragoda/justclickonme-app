@@ -6,7 +6,7 @@ export default function Home() {
   useEffect(() => {}, [])
 
   return (
-    <>
+    <div className="h-full">
       <Head>
         <title>Shorten and customize your URLs | Just Click On Me</title>
         <meta
@@ -26,6 +26,6 @@ export default function Home() {
           customize your URLs
         </h1>
       </main>
-    </>
+    </div>
   )
 }

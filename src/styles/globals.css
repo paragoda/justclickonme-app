@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-input:focus {
+input:focus,
+textarea:focus {
   @apply focus:outline-0;
+}
+
+#__next {
+  @apply h-full;
 }
