@@ -1,11 +1,18 @@
+import Image from "next/image"
 import Link from "next/link"
+import logo from "../../../public/logo.png"
 
 export const ManageNavbar = () => {
   return (
     <nav className="mb-5 border-b py-3 flex items-center justify-between">
       <div className="flex gap-3">
         <Link href="/">
-          <img src="/logo.svg" alt="JustClickOnMe" className="h-6 mx-2" />
+          <Image
+            src={logo}
+            alt="JustClickOnMe"
+            className="h-6 w-auto mx-2"
+            quality={100}
+          />
         </Link>
         <Link href="/profile">Profile</Link>
       </div>

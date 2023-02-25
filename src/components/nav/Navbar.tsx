@@ -15,8 +15,8 @@ const NavbarLinks = () => {
 
 export const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center shadow-sm mb-2 py-3">
-      <div className="navbar-start">
+    <nav className="flex justify-between items-center border-b mb-2 py-3">
+      <div>
         {/* <div className="dropdown">
           <label className="btn btn-ghost lg:hidden">
             <svg
@@ -39,7 +39,12 @@ export const Navbar = () => {
           </ul>
         </div> */}
         <Link href="/">
-          <img src="/logo.svg" alt="JustClickOnMe" className="h-7 mx-2" />
+          <Image
+            src={logo}
+            alt="JustClickOnMe"
+            className="h-6 w-auto mx-2"
+            quality={100}
+          />
         </Link>
       </div>
       <div className="hidden lg:flex gap-8">

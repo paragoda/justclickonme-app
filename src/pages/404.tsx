@@ -6,7 +6,7 @@ const Error404: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Page wasn't found | Just Click On Me</title>
+        <title>Page wasn&apos;t found | Just Click On Me</title>
         <meta
           name="description"
           content="Shorten and customize your URLs with Just Click On Me"
@@ -17,8 +17,8 @@ const Error404: NextPage = () => {
 
       <Navbar />
       <main className="">
-        <h1 className=" text-center text-5xl lg:text-7xl font-bold mt-12">
-          Page wasn't found
+        <h1 className="text-center text-5xl lg:text-7xl font-bold mt-12">
+          Page wasn&apos;t found
         </h1>
       </main>
     </>
