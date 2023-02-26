@@ -1,5 +1,5 @@
+import { Input, Textarea } from "@/shared/ui/inputs"
 import { SetStateAction, useState } from "react"
-import { Input, Textarea } from "../ui/Input"
 
 export const LinkCreate = () => {
   const [slug, setSlug] = useState("")

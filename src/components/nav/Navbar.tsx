@@ -1,4 +1,4 @@
-import { router } from "@/utils/helpers"
+import { router } from "@/shared/utils/helpers"
 import Image from "next/image"
 import Link from "next/link"
 import logo from "../../../public/logo.png"

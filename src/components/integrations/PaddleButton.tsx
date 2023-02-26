@@ -1,4 +1,4 @@
-import { env } from "@/utils/helpers"
+import { env } from "@/shared/utils/helpers"
 import Script from "next/script"
 
 declare global {

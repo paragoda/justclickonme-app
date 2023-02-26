@@ -1,4 +1,4 @@
-import { DocumentsIcon, EditIcon } from "@/components/ui/icons"
+import { DocumentsIcon, EditIcon } from "@/shared/ui/icons"
 import { LinkCreate } from "@/components/manage/LinkCreate"
 import { LinkInfo } from "@/components/manage/LinkInfo"
 import { LinkList } from "@/components/manage/LinkList"
@@ -6,7 +6,7 @@ import { ManageNavbar } from "@/components/nav/ManageNavbar"
 import { NextPage } from "next"
 import Head from "next/head"
 import { useState } from "react"
-import { LinkType } from "@/utils/types"
+import { LinkType } from "@/shared/utils/types"
 
 const folders = [
   {
@@ -61,7 +61,7 @@ const Manage: NextPage = () => {
         <ManageNavbar />
 
         <main className="flex-1 flex flex-col pb-5">
-          <button onClick={() => setTop()}>{"<"}</button>
+          <button onClick={() => setTop([])}>{"<"}</button>
           <div className="border-2  flex-1 flex flex-col lg:flex-row">
             <LinkList items={top} active={active} onClick={setActive} />
             <LinkList
