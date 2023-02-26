@@ -6,4 +6,5 @@ export type LinkType = {
   description: string
   link: string
   destination: string
+  sublinks?: LinkType[]
 }
