@@ -1,3 +1,4 @@
+import { router } from "@/utils/router"
 import Image from "next/image"
 import Link from "next/link"
 import logo from "../../../public/logo.png"
@@ -5,10 +6,8 @@ import logo from "../../../public/logo.png"
 const NavbarLinks = () => {
   return (
     <>
-      <Link href="/plans">Subscription plans</Link>
-      <Link href="/benefits">Benefits</Link>
-      <Link href="/">Why you need it?</Link>
-      <Link href="/faq">FAQ</Link>
+      <Link href={router.pricing}>Pricing</Link>
+      <Link href={router.benefits}>Benefits</Link>
     </>
   )
 }
@@ -52,7 +51,7 @@ export const Navbar = () => {
       </div>
       <Link
         className=" py-2 px-6 border-blue-100 text-blue-600 hover:bg-blue-100 border-2"
-        href="/auth"
+        href={router.auth}
       >
         Get a plan
       </Link>

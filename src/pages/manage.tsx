@@ -1,11 +1,10 @@
-import { DocumentsIcon, EditIcon } from "@/components/icons"
+import { DocumentsIcon, EditIcon } from "@/components/ui/icons"
 import { LinkCreate } from "@/components/manage/LinkCreate"
 import { LinkInfo } from "@/components/manage/LinkInfo"
 import { LinkList } from "@/components/manage/LinkList"
-import { ManageNavbar } from "@/components/manage/ManageNavbar"
+import { ManageNavbar } from "@/components/nav/ManageNavbar"
 import { NextPage } from "next"
 import Head from "next/head"
-import Link from "next/link"
 import { useState } from "react"
 
 const folders = [

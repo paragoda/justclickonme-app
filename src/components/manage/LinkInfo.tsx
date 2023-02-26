@@ -1,6 +1,6 @@
 import { LinkType } from "@/utils/types"
 import Link from "next/link"
-import { ArrowRightIcon, DocumentsIcon, EditIcon } from "../icons"
+import { ArrowRightIcon, DocumentsIcon, EditIcon } from "../ui/icons"
 
 export const LinkInfo = ({ link }: { link: LinkType }) => {
   return (

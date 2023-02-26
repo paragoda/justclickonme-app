@@ -1,4 +1,4 @@
-import { GoogleBtn } from "@/components/auth/GoogleBtn"
+import { GoogleBtn } from "@/components/integrations/GoogleBtn"
 import { Navbar } from "@/components/nav/Navbar"
 import { passwordLogin } from "@/utils/server"
 import { NextPage } from "next"

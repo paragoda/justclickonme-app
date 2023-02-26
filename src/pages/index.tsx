@@ -1,3 +1,7 @@
+import {
+  PaddleButton,
+  PaddleLoader,
+} from "@/components/integrations/PaddleButton"
 import { Navbar } from "@/components/nav/Navbar"
 import Head from "next/head"
 import { useEffect, useState } from "react"

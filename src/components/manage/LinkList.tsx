@@ -1,6 +1,6 @@
 import { LinkType } from "@/utils/types"
 import { Dispatch, SetStateAction } from "react"
-import { LinkIcon } from "../icons"
+import { LinkIcon } from "../ui/icons"
 
 const LinkListItem = () => {}
 
