@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app"
 import "@/styles/globals.css"
 import { GoogleOAuthProvider } from "@react-oauth/google"
-import { env } from "@/utils/env"
+import { env } from "@/shared/utils/helpers"
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (

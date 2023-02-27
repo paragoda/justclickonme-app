@@ -1,4 +1,4 @@
-import { DocumentsIcon, EditIcon } from "@/components/ui/icons"
+import { DocumentsIcon, EditIcon } from "@/shared/ui/icons"
 import { LinkCreate } from "@/components/manage/LinkCreate"
 import { LinkInfo } from "@/components/manage/LinkInfo"
 import { LinkList } from "@/components/manage/LinkList"
@@ -6,6 +6,7 @@ import { ManageNavbar } from "@/components/nav/ManageNavbar"
 import { NextPage } from "next"
 import Head from "next/head"
 import { useState } from "react"
+import { LinkType } from "@/shared/utils/types"
 
 const folders = [
   {
@@ -15,38 +16,40 @@ const folders = [
     description: "Link with same slug as folder",
     link: "justclickon.me/flurium",
     destination: "https://github.com/flurium",
-  },
-]
-const subfolders = [
-  {
-    slug: "auth",
-    title: "Auth confirmation at JustClickOnMe",
-    created: "February 24, 2023 1:50 PM",
-    description: "Link to auth of JustClickOnMe.",
-    link: "justclickon.me/flurium/auth",
-    destination:
-      "https://drive.google.com/file/d/1leYgFAsa5Gwc4g59N9gbiVSGZE5i0v-B/view?usp=share_link",
-  },
-  {
-    slug: "front",
-    title: "Frontend on JustClickOnMe",
-    created: "February 24, 2023 1:50 PM",
-    description:
-      "Link to frontend of JustClickOnMe, should be used for redirects. It’s small description to better tcrs ntncrsm trcstn rcmst trcs tnmrcnmst nrcnst tc tcxrgqo cogqc qpgc orqofg cxqgckqlyeaintcrsiantrcst ohcrhtso crht rcst rcsxt xyl grgq csrqrcsqq tcrsqt qcrsqt crxsqqu;qlqrnes rnegqr tqersqgfcqfb gofcqgcq gqg oyqtoqnderstand purpose of link.",
-    link: "justclickon.me/flurium/front",
-    destination: "https://github.com/flurium/justclickonme-front",
+    sublinks: [
+      {
+        slug: "auth",
+        title: "Auth confirmation at JustClickOnMe",
+        created: "February 24, 2023 1:50 PM",
+        description: "Link to auth of JustClickOnMe.",
+        link: "justclickon.me/flurium/auth",
+        destination:
+          "https://drive.google.com/file/d/1leYgFAsa5Gwc4g59N9gbiVSGZE5i0v-B/view?usp=share_link",
+      },
+      {
+        slug: "front",
+        title: "Frontend on JustClickOnMe",
+        created: "February 24, 2023 1:50 PM",
+        description:
+          "Link to frontend of JustClickOnMe, should be used for redirects. It’s small description to better tcrs ntncrsm trcstn rcmst trcs tnmrcnmst nrcnst tc tcxrgqo cogqc qpgc orqofg cxqgckqlyeaintcrsiantrcst ohcrhtso crht rcst rcsxt xyl grgq csrqrcsqq tcrsqt qcrsqt crxsqqu;qlqrnes rnegqr tqersqgfcqfb gofcqgcq gqg oyqtoqnderstand purpose of link.",
+        link: "justclickon.me/flurium/front",
+        destination: "https://github.com/flurium/justclickonme-front",
+      },
+    ],
   },
 ]
 
 const Manage: NextPage = () => {
-  const [active, setActive] = useState<null | {
-    slug: string
-    title: string
-    created: string
-    description: string
-    link: string
-    destination: string
-  }>(null)
+  const [active, setActive] = useState<null | LinkType>(null)
+
+  const [top, setTop] = useState<LinkType[]>(folders)
+
+  const changeActiveLink = (link: LinkType, list: LinkType[]) => {
+    setActive(link)
+    if (list.length != 0) {
+      setTop(list)
+    }
+  }
 
   return (
     <>
@@ -58,13 +61,13 @@ const Manage: NextPage = () => {
         <ManageNavbar />
 
         <main className="flex-1 flex flex-col pb-5">
-          {/* <div>path</div> */}
+          <button onClick={() => setTop([])}>{"<"}</button>
           <div className="border-2  flex-1 flex flex-col lg:flex-row">
-            <LinkList items={folders} active={active} setActive={setActive} />
+            <LinkList items={top} active={active} onClick={setActive} />
             <LinkList
-              items={subfolders}
+              items={active?.sublinks ?? []}
               active={active}
-              setActive={setActive}
+              onClick={(link) => changeActiveLink(link, active?.sublinks ?? [])}
             />
             <div className="flex-1 lg:basis-3/5 py-6 px-8">
               {active ? <LinkInfo link={active} /> : <LinkCreate />}

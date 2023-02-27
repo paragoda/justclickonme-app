@@ -1,17 +1,17 @@
-import { LinkType } from "@/utils/types"
+import { LinkType } from "@/shared/utils/types"
 import { Dispatch, SetStateAction } from "react"
-import { LinkIcon } from "../ui/icons"
+import { LinkIcon } from "@/shared/ui/icons"
 
 const LinkListItem = () => {}
 
 export const LinkList = ({
   items,
   active,
-  setActive,
+  onClick,
 }: {
   items: LinkType[]
   active: LinkType | null
-  setActive: Dispatch<SetStateAction<LinkType | null>>
+  onClick: (link: LinkType) => void
 }) => {
   return (
     <div className=" border-b-2 lg:basis-1/5 lg:border-b-0 lg:border-r-2">
@@ -21,7 +21,7 @@ export const LinkList = ({
             active?.slug == folder.slug ? "bg-gray-100" : "hover:bg-gray-50"
           }`}
           key={folder.slug}
-          onClick={() => setActive(folder)}
+          onClick={() => onClick(folder)}
         >
           <LinkIcon />
           {folder.slug}

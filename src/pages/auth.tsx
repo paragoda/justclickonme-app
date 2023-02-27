@@ -1,6 +1,6 @@
 import { GoogleBtn } from "@/components/integrations/GoogleBtn"
 import { Navbar } from "@/components/nav/Navbar"
-import { passwordLogin } from "@/utils/server"
+import { passwordLogin } from "@/shared/utils/server"
 import { NextPage } from "next"
 import Head from "next/head"
 import { useState } from "react"
