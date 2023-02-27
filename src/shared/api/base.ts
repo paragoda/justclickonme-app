@@ -5,7 +5,7 @@ const url = (path: string) => `${domain}${path}`
 type CallInput = {
   path: string
   method: "POST" | "GET" | "PUT" | "DELETE"
-  input: object
+  input?: object
 }
 
 type CallOutput<T> = [T, null] | [null, Response]
@@ -17,7 +17,7 @@ export const call = async <T>({ path, method, input }: CallInput): Promise<CallO
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify(input),
+    body: input && JSON.stringify(input),
   })
 
   if (data.ok) {
