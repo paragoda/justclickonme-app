@@ -5,22 +5,35 @@ import { LinkCreate } from "@/components/manage/LinkCreate"
 import { LinkInfo } from "@/components/manage/LinkInfo"
 import { LinkList } from "@/components/manage/LinkList"
 import { ManageNavbar } from "@/components/nav/ManageNavbar"
-import { useState } from "react"
+import { Fragment, useEffect, useRef, useState } from "react"
 import { LinkType } from "@/shared/utils/types"
 import { constants } from "@/shared/utils/helpers"
 import { callRefreshToken } from "@/shared/api/auth"
 import { listlinks } from "@/shared/api/test"
+import autoAnimate from "@formkit/auto-animate"
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 
 const Manage: NextPage = () => {
-  const [active, setActive] = useState<string>("")
+  const [activeSlug, setActiveSlug] = useState<string>("")
+  const [links, setLinks] = useState<LinkType[]>(listlinks)
 
-  const [top, setTop] = useState<LinkType[]>(listlinks)
+  const activeLink = links.find((l) => l.slug == activeSlug)
 
-  const changeActiveLink = (link: string) => {
-    setActive(link)
+  const changeActiveLink = (slug: string) => {
+    setActiveSlug(slug)
+
+    // TODO: add marker that iditifies is already requested
+
+    if (links.some((l) => l.slug.substring(0, l.slug.lastIndexOf("/")) == slug)) {
+      console.log("exist")
+    } else {
+      console.log("not exist")
+    }
   }
+  const [parent, enableAnimations] = useAutoAnimate({
+    duration: 150,
+  })
 
-  console.log(active)
   return (
     <>
       <Head>
@@ -31,11 +44,11 @@ const Manage: NextPage = () => {
         <ManageNavbar />
 
         <main className="flex-1 flex flex-col pb-5">
-          <div className="border-x border-t flex  items-center">
+          <div className="border-x border-t flex items-center">
             <button
               className="hover:bg-gray-50 p-3 h-full"
               onClick={() => {
-                setActive(active.substring(0, active.lastIndexOf("/")))
+                setActiveSlug(activeSlug.substring(0, activeSlug.lastIndexOf("/")))
               }}
             >
               <svg
@@ -53,38 +66,55 @@ const Manage: NextPage = () => {
                 />
               </svg>
             </button>
+
             <div className="border-r h-full" />
-            <span className="px-5 py-1">{top.find((l) => l.slug == active)?.slug}</span>
+
+            <div className="flex gap-2 px-5 items-center" ref={parent}>
+              {activeSlug.split("/").map((part, i, arr) => {
+                const click = () =>
+                  setActiveSlug(activeSlug.substring(0, activeSlug.indexOf(part)).concat(part))
+
+                if (i == arr.length - 1) return <span key={part}>{part}</span>
+                return (
+                  <Fragment key={part}>
+                    <span className="cursor-pointer" onClick={click}>
+                      {part}
+                    </span>
+                    <span>/</span>
+                  </Fragment>
+                )
+              })}
+            </div>
           </div>
           <div className="border  flex-1 flex flex-col lg:flex-row">
             <LinkList
-              items={top.filter((l) => {
+              items={links.filter((l) => {
                 return (
                   l.slug.substring(0, l.slug.lastIndexOf("/")) ==
-                  (active ? active.substring(0, active.lastIndexOf("/")) : "")
+                  (activeSlug ? activeSlug.substring(0, activeSlug.lastIndexOf("/")) : "")
                 )
               })}
-              active={top.find((l) => l.slug == active) ?? null}
-              onClick={setActive}
+              active={activeLink ?? null}
+              onClick={changeActiveLink}
             />
             <LinkList
               items={
-                active != ""
-                  ? top.filter((l) => {
+                activeSlug != ""
+                  ? links.filter((l) => {
                       const slash = l.slug.lastIndexOf("/")
                       if (slash == -1) return false
-                      return l.slug.substring(0, slash) == active
+                      return l.slug.substring(0, slash) == activeSlug
                     })
                   : []
               }
-              active={top.find((l) => l.slug == active) ?? null}
-              onClick={setActive}
+              active={activeLink ?? null}
+              onClick={changeActiveLink}
             />
             <div className="flex-1 lg:basis-3/5 py-6 px-8">
-              {active ? <LinkInfo link={top.find((l) => l.slug == active)!} /> : <LinkCreate />}
+              {activeSlug ? <LinkInfo link={activeLink!} /> : <LinkCreate />}
             </div>
 
-            {active && (
+            {activeSlug && (
               <div className="flex border-t lg:hidden">
                 <button className="flex-grow py-3 flex justify-center gap-x-2 items-center ">
                   <EditIcon />
@@ -95,9 +125,7 @@ const Manage: NextPage = () => {
                   className="py-3 flex-grow justify-center gap-x-2 items-center  flex "
                   onClick={async () => {
                     if (navigator.clipboard) {
-                      await navigator.clipboard.writeText(
-                        top.find((l) => l.slug == active)?.slug ?? ""
-                      )
+                      await navigator.clipboard.writeText(activeSlug)
                     } else {
                       alert("Sorry can't copy")
                     }
