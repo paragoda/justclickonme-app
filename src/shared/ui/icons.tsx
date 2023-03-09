@@ -72,3 +72,9 @@ export const LinkIcon = ({ className }: IconProps) => (
     />
   </IconBase>
 )
+
+export const CheckIcon = ({ className }: IconProps) => (
+  <IconBase className={className}>
+    <path d="M1 7L5.5 11.5L14 3" stroke="#21a500" stroke-linecap="square" />
+  </IconBase>
+)
