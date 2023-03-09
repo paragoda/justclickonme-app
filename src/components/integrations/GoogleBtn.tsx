@@ -1,12 +1,12 @@
-import { googleAuth } from "@/shared/utils/server"
+import { googleLogin } from "@/shared/api/auth"
 import { GoogleLogin } from "@react-oauth/google"
 
 export const GoogleBtn = ({ user }: { user: boolean }) => {
   const googleSuccess = async (res: any) => {
     const idToken = res.credential
     if (idToken) {
-      const accessToken = await googleAuth(idToken)
-      console.log(accessToken)
+      await googleLogin(idToken)
+      //console.log(accessToken)
     }
   }
 

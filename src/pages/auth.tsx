@@ -1,6 +1,6 @@
 import { GoogleBtn } from "@/components/integrations/GoogleBtn"
 import { Navbar } from "@/components/nav/Navbar"
-import { passwordLogin } from "@/shared/utils/server"
+import { passwordLogin } from "@/shared/api/auth"
 import { NextPage } from "next"
 import Head from "next/head"
 import { useState } from "react"
@@ -13,19 +13,16 @@ const Auth: NextPage = () => {
   const [password, setPassword] = useState("")
 
   const loginWithPassword = async () => {
-    const [token, err] = await passwordLogin(email, password)
+    await passwordLogin(email, password)
 
-    console.log(token, err)
+    //    console.log(token, err)
   }
 
   return (
     <>
       <Head>
         <title>Shorten and customize your URLs | Just Click On Me</title>
-        <meta
-          name="description"
-          content="Shorten and customize your URLs with Just Click On Me"
-        />
+        <meta name="description" content="Shorten and customize your URLs with Just Click On Me" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

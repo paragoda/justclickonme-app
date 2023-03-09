@@ -1,4 +1,3 @@
-
 export type LinkType = {
   slug: string
   title: string
@@ -6,5 +5,4 @@ export type LinkType = {
   description: string
   link: string
   destination: string
-  sublinks?: LinkType[]
 }
