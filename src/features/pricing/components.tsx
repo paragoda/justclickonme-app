@@ -40,7 +40,7 @@ export const PricingPlan = ({
         <ul className="mt-7 gap-2 flex flex-col">
           <span className=" text-gray-400">Get started with:</span>
           {features.map((feature) => (
-            <li>
+            <li key={feature}>
               <CheckIcon className="inline mr-2" />
               {feature}
             </li>
