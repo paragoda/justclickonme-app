@@ -16,22 +16,22 @@ export const PricingPlan = ({
     <div className={`border p-8 flex flex-col justify-between ${className}`}>
       <div>
         <div className="text-center mb-5">
-          <h5 className=" text-4xl font-medium">{title}</h5>
+          <h2 className=" text-4xl font-medium">{title}</h2>
           <p className=" text-gray-400 mt-3">{description}</p>
         </div>
 
         <div>
-          <h6 className="text-5xl font-medium inline mr-5">
+          <h3 className="text-5xl font-medium inline mr-5">
             ${period == "annually" ? price.annually : price.monthly}
             <span className=" text-gray-400 text-lg font-normal">
               /{period == "annually" ? "year" : "month"}
             </span>
-          </h6>
+          </h3>
           {annualSale && period == "annually" ? (
-            <h6 className="text-gray-400 inline">
+            <h3 className="text-gray-400 inline">
               <span className="text-3xl line-through">${annualSale}</span>
               <span className="text-lg font-normal">/year</span>
-            </h6>
+            </h3>
           ) : (
             <></>
           )}

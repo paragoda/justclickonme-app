@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import Head from "next/head"
 
-const SettiongPage: NextPage = () => {
+const SettingPage: NextPage = () => {
   return (
     <>
       <Head>
@@ -13,3 +13,5 @@ const SettiongPage: NextPage = () => {
     </>
   )
 }
+
+export default SettingPage
