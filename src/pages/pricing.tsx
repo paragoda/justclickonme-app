@@ -26,8 +26,8 @@ const PricingPage: NextPage = () => {
       <Navbar />
 
       <div className="text-center">
-        <h1 className="text-5xl lg:text-7xl font-bold mt-12">Pricing</h1>
-        <p className="text-2xl mt-5 text-gray-400">Predictable pricing, no surprises</p>
+        <h1 className="text-4xl lg:text-6xl font-bold mt-12">Pricing</h1>
+        <p className="text-xl mt-5 text-gray-400">Predictable pricing, no surprises</p>
       </div>
 
       <PeriodSwitch period={period} setPeriod={setPeriod} />

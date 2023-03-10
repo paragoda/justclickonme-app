@@ -1,6 +1,7 @@
 import { GoogleBtn } from "@/components/integrations/GoogleBtn"
 import { Navbar } from "@/components/nav/Navbar"
 import { passwordLogin } from "@/shared/api/auth"
+import { Input } from "@/shared/ui/inputs"
 import { NextPage } from "next"
 import Head from "next/head"
 import { useState } from "react"
@@ -30,9 +31,7 @@ const Auth: NextPage = () => {
       <Navbar />
 
       <main>
-        <h1 className="text-center text-5xl lg:text-7xl font-bold mt-12 mb-8 mx-6">
-          Get started with:
-        </h1>
+        <h1 className="text-center text-5xl lg:text-7xl font-bold mt-12 mb-8 mx-6">Get Started</h1>
 
         <div className="flex flex-col items-center gap-4 max-w-xs m-auto">
           <div className="flex text-xl gap-3  items-center">
@@ -40,19 +39,33 @@ const Auth: NextPage = () => {
             Google
           </div>
 
-          <span>or</span>
-          <input
-            className="input input-bordered w-full px-6"
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
+          <div className="flex w-full items-center gap-4">
+            <hr className="flex-1" />
+            <span className="mb-1">or</span>
+            <hr className="flex-1" />
+          </div>
+
+          <Input
+            type="email"
+            placeholder="email"
+            setValue={setEmail}
+            className="w-full"
+            value={email}
+            label="Email"
           />
-          <input
+          <Input
             type="password"
-            className="input input-bordered w-full px-6"
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            placeholder="password"
+            setValue={setPassword}
+            className="w-full"
+            value={password}
+            label="Password"
           />
-          <button className="btn" onClick={loginWithPassword}>
+
+          <button
+            className=" py-3 px-6 border-blue-100 text-blue-600 hover:bg-blue-100 border  w-full"
+            onClick={loginWithPassword}
+          >
             Start
           </button>
         </div>

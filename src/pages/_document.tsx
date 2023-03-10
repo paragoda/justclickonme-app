@@ -4,11 +4,9 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="min-h-screen m-0">
-        <div className="px-5 max-w-[82rem] mx-auto h-full">
-          <Main />
-          <NextScript />
-        </div>
+      <body>
+        <Main />
+        <NextScript />
       </body>
     </Html>
   )

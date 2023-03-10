@@ -1,5 +1,7 @@
 import { PeriodType, PricingPlanType } from "./data"
 import { CheckIcon } from "@/shared/ui/icons"
+import Link from "next/link"
+import { router } from "@/shared/utils/helpers"
 
 export const PricingPlan = ({
   className,
@@ -48,9 +50,12 @@ export const PricingPlan = ({
         </ul>
       </div>
 
-      <button className="w-full border border-blue-300 text-blue-700 py-3 mt-10">
+      <Link
+        href={router.auth}
+        className="w-full border text-center border-blue-300 text-blue-700 py-3 mt-10"
+      >
         Get Started
-      </button>
+      </Link>
     </div>
   )
 }

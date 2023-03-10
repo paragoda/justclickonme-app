@@ -1,5 +1,6 @@
 import { googleLogin } from "@/shared/api/auth"
 import { GoogleLogin } from "@react-oauth/google"
+import { useRef } from "react"
 
 export const GoogleBtn = ({ user }: { user: boolean }) => {
   const googleSuccess = async (res: any) => {
@@ -11,15 +12,22 @@ export const GoogleBtn = ({ user }: { user: boolean }) => {
   }
 
   const googleError = () => {}
+
+  // DON'T ASK ME WHY I AM GENIUS
   return (
-    <GoogleLogin
-      auto_select={!user}
-      useOneTap={!user}
-      onSuccess={googleSuccess}
-      onError={googleError}
-      text="continue_with"
-      type="icon"
-      shape="circle"
-    />
+    <div
+      className=" overflow-hidden border justify-center flex items-center"
+      style={{ width: "2.39rem", height: "2.38rem" }}
+    >
+      <GoogleLogin
+        auto_select={!user}
+        useOneTap={true}
+        onSuccess={googleSuccess}
+        onError={googleError}
+        text="continue_with"
+        type="icon"
+        shape="square"
+      />
+    </div>
   )
 }

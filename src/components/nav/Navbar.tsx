@@ -38,12 +38,7 @@ export const Navbar = () => {
           </ul>
         </div> */}
         <Link href="/">
-          <Image
-            src={logo}
-            alt="JustClickOnMe"
-            className="h-6 w-auto mx-2"
-            quality={100}
-          />
+          <Image src={logo} alt="JustClickOnMe" className="h-6 w-auto mx-2" quality={100} />
         </Link>
       </div>
       <div className="hidden lg:flex gap-8">
@@ -51,9 +46,9 @@ export const Navbar = () => {
       </div>
       <Link
         className=" py-2 px-6 border-blue-100 text-blue-600 hover:bg-blue-100 border-2"
-        href={router.auth}
+        href={router.pricing}
       >
-        Get a plan
+        Get Started
       </Link>
     </nav>
   )
