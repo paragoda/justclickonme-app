@@ -9,7 +9,7 @@ textarea:focus {
 
 html,
 body {
-  @apply h-full;
+  @apply h-full font-sans;
 }
 
 #__next {

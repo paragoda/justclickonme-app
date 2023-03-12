@@ -7,21 +7,14 @@ import Head from "next/head"
 import { useEffect, useState } from "react"
 
 export default function Home({ isAuthed }: { isAuthed: boolean }) {
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const refresh = async () => {
-      const res = await callRefreshToken()
-      if (res) setLoading(false)
-    }
-    refresh()
-  }, [])
-
   return (
     <div className="h-full">
       <Head>
-        <title>Shorten and customize your URLs | Just Click On Me</title>
-        <meta name="description" content="Shorten and customize your URLs with Just Click On Me" />
+        <title>Shorten and customize your links | Just Click On Me</title>
+        <meta
+          name="description"
+          content="Shorten and customize your links with JustClickOnMe. An Open Source alternative to Bitly."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -29,23 +22,27 @@ export default function Home({ isAuthed }: { isAuthed: boolean }) {
       <Navbar />
 
       <main>
-        <h1 className="text-center text-5xl lg:text-7xl font-bold mt-12">
-          Shorten and
-          <br />
-          customize your URLs
-        </h1>
+        <div className="h-[50vh] flex flex-col justify-center items-center text-center">
+          <div>
+            <h1 className="text-5xl lg:text-7xl font-black max-w-3xl">
+              Shorten and customize your links
+            </h1>
+            <h2 className="text-2xl lg:text-3xl font-light mt-8">
+              An Open Source alternative to Bitly
+            </h2>
+          </div>
+        </div>
 
-        <button
-          onClick={async () => {
-            console.log(getAccessToken())
-            await getAll()
-          }}
-        >
-          call
-        </button>
-
-        <h2>{loading ? "loading" : "user"}</h2>
-        <h2>{isAuthed ? "server user" : "not server user"}</h2>
+        <section className="text-xl flex flex-col gap-4 text-center">
+          <p>
+            Each link <b>encourages</b> people <b>to click</b> on it because of the domain which{" "}
+            <b>calls to action</b>
+          </p>
+          <p>
+            <b>Readable</b> and <b>understandable</b> links as usual sentences or very short ones
+          </p>
+          <p>Developer friendly, communicate with JustClickOnMe through API</p>
+        </section>
       </main>
     </div>
   )
