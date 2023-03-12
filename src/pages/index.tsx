@@ -21,7 +21,7 @@ export default function Home({ isAuthed }: { isAuthed: boolean }) {
 
       <Navbar />
 
-      <main>
+      <main className="pb-20">
         <div className="h-[50vh] flex flex-col justify-center items-center text-center">
           <div>
             <h1 className="text-5xl lg:text-7xl font-black max-w-3xl">
@@ -33,7 +33,22 @@ export default function Home({ isAuthed }: { isAuthed: boolean }) {
           </div>
         </div>
 
-        <section className="text-xl flex flex-col gap-4 text-center">
+        <div className="flex flex-col gap-4 justify-center items-center text-xl">
+          <a className="text-blue-500" href="https://www.youtube.com/watch?v=rnfAVasBkQc">
+            www.youtube.com/watch?v=rnfAVasBkQc
+          </a>
+          <div className="flex w-full items-center gap-4">
+            <hr className="flex-1" />
+            <span className="mb-1">become</span>
+            <hr className="flex-1" />
+          </div>
+          {/* change it to realy JustClickOnMe link */}
+          <a href="https://www.youtube.com/watch?v=rnfAVasBkQc" className="text-blue-500">
+            justclickon.me/go-all-the-way
+          </a>
+        </div>
+
+        <section className="text-xl flex mt flex-col gap-4 text-center mt-20">
           <p>
             Each link <b>encourages</b> people <b>to click</b> on it because of the domain which{" "}
             <b>calls to action</b>
