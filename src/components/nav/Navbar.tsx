@@ -6,7 +6,7 @@ import logo from "../../../public/logo.png"
 const NavbarLinks = () => {
   return (
     <>
-      {/* <Link href={router.pricing}>Pricing</Link> */}
+      <Link href={router.pricing}>Pricing</Link>
       {/* <Link href={router.benefits}>Benefits</Link> */}
     </>
   )
@@ -41,14 +41,14 @@ export const Navbar = () => {
           <Image src={logo} alt="JustClickOnMe" className="h-6 w-auto mx-2" quality={100} />
         </Link>
       </div>
-      {/* <div className="hidden lg:flex gap-8">
+      <div className="flex gap-8">
         <NavbarLinks />
-      </div> */}
+      </div>
       <Link
         className=" py-2 px-6 border-blue-100 text-blue-600 hover:bg-blue-100 border-2"
-        href={router.pricing}
+        href={router.manage}
       >
-        Get Started
+        Dashboard
       </Link>
     </nav>
   )

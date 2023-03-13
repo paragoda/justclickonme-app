@@ -1,6 +1,7 @@
 import { constants } from "../utils/helpers"
 import jwtDecode from "jwt-decode"
-import { callRefreshToken, getAccessToken } from "./auth"
+import { callRefreshToken, getAccessToken, setAccessToken } from "./auth"
+import { AccessToken } from "./types"
 const domain = "http://localhost:5125"
 
 const url = (path: string) => `${domain}${path}`
@@ -13,37 +14,46 @@ type CallInput = {
   refreshToken?: string
 }
 
-type CallOutput<T> = [T, null, "success"] | [null, Response, "fail"] | [null, null, "error"]
+type CallResponse<T> = [T, null, "success"] | [null, Response, "fail"] | [null, null, "error"]
+
+let apiStore: {
+  accessToken: string | null
+} = {
+  accessToken: null,
+}
+
+const isAccessTokenExpired = (token: string) => {
+  let decoded = jwtDecode<{ exp: number }>(token)
+  return Date.now() >= decoded.exp * 1000
+}
 
 // just click on me specific fetch
 export const call = async <T>({
   path,
   method,
   input,
-  accessToken,
   refreshToken,
-}: CallInput): Promise<CallOutput<T>> => {
+}: CallInput): Promise<CallResponse<T>> => {
   let headers: Record<string, string> = {
     "content-type": "application/json",
   }
-  if (accessToken) {
-    let decoded = jwtDecode<{
-      exp: number
-    }>(accessToken)
 
-    if (Date.now() >= decoded.exp * 1000 && refreshToken) {
-      if (!refreshToken) return [null, null, "error"]
+  if (apiStore.accessToken && !isAccessTokenExpired(apiStore.accessToken)) {
+    headers["authorization"] = apiStore.accessToken
+  } else if (refreshToken) {
+    const refreshRes = await fetch(url("/api/auth/refresh"), {
+      method: "GET",
+      headers: {
+        cookie: `${constants.refreshTokenCookie}=${refreshToken}`,
+      },
+    })
 
-      const refreshRes = await callRefreshToken(refreshToken)
-      if (!refreshRes) return [null, null, "error"]
-
-      const access = getAccessToken()
-      accessToken = access ? access : ""
+    if (refreshRes.ok) {
+      const data = (await refreshRes.json()) as AccessToken
+      apiStore.accessToken = data.accessToken
+      headers["authorization"] = `bearer ${data.accessToken}`
     }
-
-    headers["authorization"] = accessToken
   }
-  if (refreshToken) headers["cookie"] = `${constants.refreshTokenCookie}=${refreshToken}`
 
   try {
     const data = await fetch(url(path), {

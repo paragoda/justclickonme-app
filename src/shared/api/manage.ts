@@ -1,11 +1,12 @@
 import { call } from "./base"
 import { AccessToken } from "./types"
 
-export const getAll = async () => {
+export const getLinks = async (prefix: string, refreshToken: string) => {
   const data = await call<any>({
     path: "/api/links",
     method: "GET",
+    refreshToken,
   })
 
-  console.log(data)
+  return data
 }

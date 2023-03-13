@@ -1,10 +1,8 @@
 import { Navbar } from "@/components/nav/Navbar"
-import { getAccessToken, callRefreshToken } from "@/shared/api/auth"
-import { getAll } from "@/shared/api/manage"
-import { constants } from "@/shared/utils/helpers"
+import { callRefreshToken } from "@/shared/api/auth"
+import { constants, router } from "@/shared/utils/helpers"
 import { GetServerSideProps } from "next"
 import Head from "next/head"
-import { useEffect, useState } from "react"
 
 export default function Home({ isAuthed }: { isAuthed: boolean }) {
   return (
@@ -66,6 +64,16 @@ export default function Home({ isAuthed }: { isAuthed: boolean }) {
 export const getServerSideProps: GetServerSideProps<{ isAuthed: boolean }> = async (ctx) => {
   const refreshCookie = ctx.req.cookies[constants.refreshTokenCookie]
   const res = await callRefreshToken(refreshCookie)
+
+  if (res) {
+    return {
+      props: {},
+      redirect: {
+        destination: router.manage,
+        permanent: false,
+      },
+    }
+  }
 
   return {
     props: {

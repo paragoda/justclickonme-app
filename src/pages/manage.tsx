@@ -1,27 +1,28 @@
 import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
 import { DocumentsIcon, EditIcon } from "@/shared/ui/icons"
-import { LinkCreate } from "@/components/manage/LinkCreate"
-import { LinkInfo } from "@/components/manage/LinkInfo"
 import { LinkList } from "@/components/manage/LinkList"
 import { ManageNavbar } from "@/components/nav/ManageNavbar"
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useState } from "react"
 import { LinkType } from "@/shared/utils/types"
-import { constants } from "@/shared/utils/helpers"
-import { callRefreshToken } from "@/shared/api/auth"
+import { constants, router } from "@/shared/utils/helpers"
 import { listlinks } from "@/shared/api/test"
-import autoAnimate from "@formkit/auto-animate"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
+import { getLinks } from "@/shared/api/manage"
+import { AccessToken } from "@/shared/api/types"
+import { LinkForm, LinkInfo } from "@/features/manage"
 
-const Manage: NextPage = () => {
+const ManagePage: NextPage<AccessToken> = () => {
   const [activeSlug, setActiveSlug] = useState<string>("")
   const [links, setLinks] = useState<LinkType[]>(listlinks)
+
+  const [stage, setStage] = useState<"waiting" | "edit" | "new" | "info">("waiting")
 
   const activeLink = links.find((l) => l.slug == activeSlug)
 
   const changeActiveLink = (slug: string) => {
     setActiveSlug(slug)
-
+    setStage("info")
     // TODO: add marker that iditifies is already requested
 
     if (links.some((l) => l.slug.substring(0, l.slug.lastIndexOf("/")) == slug)) {
@@ -30,7 +31,7 @@ const Manage: NextPage = () => {
       console.log("not exist")
     }
   }
-  const [parent, enableAnimations] = useAutoAnimate({
+  const [parent] = useAutoAnimate({
     duration: 150,
   })
 
@@ -41,7 +42,7 @@ const Manage: NextPage = () => {
       </Head>
 
       <div className="h-full flex flex-col ">
-        <ManageNavbar />
+        <ManageNavbar onNewClick={() => setStage("new")} />
 
         <main className="flex-1 flex flex-col pb-5">
           <div className="border-x border-t flex items-center">
@@ -111,7 +112,22 @@ const Manage: NextPage = () => {
               onClick={changeActiveLink}
             />
             <div className="flex-1 lg:basis-3/5 py-6 px-8">
-              {activeSlug ? <LinkInfo link={activeLink!} /> : <LinkCreate />}
+              {activeSlug ? (
+                stage == "info" ? (
+                  <LinkInfo link={activeLink!} onEditClick={() => setStage("edit")} />
+                ) : stage == "edit" ? (
+                  <LinkForm
+                    slug={activeLink!.slug}
+                    description={activeLink!.description}
+                    destination={activeLink!.destination}
+                    title={activeLink!.title}
+                  />
+                ) : (
+                  <LinkForm />
+                )
+              ) : (
+                <div></div>
+              )}
             </div>
 
             {activeSlug && (
@@ -143,16 +159,26 @@ const Manage: NextPage = () => {
   )
 }
 
-export default Manage
-
-export const getServerSideProps: GetServerSideProps<{ isAuthed: boolean }> = async (ctx) => {
+export default ManagePage
+//GetServerSideProps<>
+export const getServerSideProps: GetServerSideProps<any> = async (ctx) => {
   // auth
   const refreshCookie = ctx.req.cookies[constants.refreshTokenCookie]
-  const res = await callRefreshToken(refreshCookie)
+
+  if (!refreshCookie) {
+    return {
+      props: {},
+      redirect: {
+        destination: router.auth,
+        permanent: false,
+      },
+    }
+  }
+
+  //const links = await getLinks("/", refreshCookie)
+  // console.log(links)
 
   return {
-    props: {
-      isAuthed: res,
-    },
+    props: {},
   }
 }

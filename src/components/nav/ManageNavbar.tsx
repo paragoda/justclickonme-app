@@ -2,7 +2,11 @@ import Image from "next/image"
 import Link from "next/link"
 import logo from "../../../public/logo.png"
 
-export const ManageNavbar = () => {
+type ManageNavbarProps = {
+  onNewClick: () => void
+}
+
+export const ManageNavbar = ({ onNewClick }: ManageNavbarProps) => {
   return (
     <nav className="mb-5 border-b py-3 flex items-center justify-between">
       <div className="flex gap-3">
@@ -13,7 +17,10 @@ export const ManageNavbar = () => {
       </div>
 
       <div className="flex gap-3">
-        <button className=" py-2 px-7 border-2 border-blue-100 text-sm flex items-center font-medium text-blue-600">
+        <button
+          className=" py-2 px-7 border-2 border-blue-100 text-sm flex items-center font-medium text-blue-600"
+          onClick={onNewClick}
+        >
           New +
         </button>
         <Link

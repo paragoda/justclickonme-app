@@ -3,6 +3,7 @@ import { AccessToken } from "./types"
 
 let accessToken: string | null = null
 export const getAccessToken = () => accessToken
+export const setAccessToken = (token: string) => (accessToken = token)
 
 export const callRefreshToken = async (refreshToken?: string) => {
   const [data, res] = await call<AccessToken>({
@@ -20,7 +21,7 @@ export const callRefreshToken = async (refreshToken?: string) => {
 
 export const passwordLogin = async (email: string, password: string) => {
   const [data, res] = await call<AccessToken>({
-    path: "/api/auth/login",
+    path: "/api/auth/password",
     method: "POST",
     input: {
       email,
