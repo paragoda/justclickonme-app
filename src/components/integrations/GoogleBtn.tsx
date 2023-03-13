@@ -20,8 +20,6 @@ export const GoogleBtn = ({ user }: { user: boolean }) => {
       style={{ width: "2.39rem", height: "2.38rem" }}
     >
       <GoogleLogin
-        auto_select={!user}
-        useOneTap={true}
         onSuccess={googleSuccess}
         onError={googleError}
         text="continue_with"
